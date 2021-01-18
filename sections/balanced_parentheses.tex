@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Balanced Parentheses
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Balanced Parentheses}
+
+The parentheses in a string are balanced if and only if the following two
+conditions are met:
+
+\begin{enumerate}
+    \item The number of \mintinline{python}{"("} and \mintinline{python}{")"}
+          are equal
+    \item Scanning through the string from left to right and counting how many
+          \mintinline{python}{"("} and \mintinline{python}{")"} there are so
+          far, there should never be a time where there are more
+          \mintinline{python}{")"} than \mintinline{python}{"("}. We denote the
+          balance of the string as
+          \mintinline{python}{balance = count("(") - count(")")}
+\end{enumerate}
+
+If we only allow for \mintinline{python}{"()"} pair of parentheses, then the
+following will check if the parenthesis are balanced:
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def is_balanced(string: str) -> bool:
+            """Check if a given string has balanced parentheses."""
+
+            balance: int = 0
+            for char in string:
+                if char == "(":
+                    balance += 1
+                elif char == ")":
+                    balance -= 1
+
+                if balance < 0:
+                    return False
+
+            return balance == 0
+    \end{minted}
+\end{figure}
+
+If we allow for more than one pair of parentheses, the following stack-based
+implementation generalizes well:
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def is_balanced(string: str) -> bool:
+            """Check if a given string has balanced parentheses."""
+
+            stack: list[str] = []
+            closing: dict[str, str] = {")": "(", "}": "{", "]": "["}
+            opening: set[str] = set(closing.values())
+            for char in string:
+                if char in opening:
+                    stack.append(char)
+                elif char in closing:
+                    if not stack or closing[char] != stack.pop():
+                        return False
+
+            return not stack
+    \end{minted}
+\end{figure}

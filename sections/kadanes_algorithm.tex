@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kadane's Algorithm - Maximum Contiguous Subarray
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kadane's Algorithm - Maximum Contiguous Subarray}
+
+An implemmentation of the Kadane's algorithm.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def max_subarray_sum(arr: list[float]) -> float:
+            """Return the maximum subarray sum."""
+
+            cur: float = 0
+            res: float = float("-inf")
+            for num in nums:
+                cur = max(cur + num, num)
+                res = max(res, cur)
+            return res
+    \end{minted}
+\end{figure}
+
+This algorithm is a trivial example of dynamic programming.

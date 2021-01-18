@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trie - A Prefix Tree
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Trie - A Prefix Tree}
+
+There are many ways to constuct a trie. We will use a hash map based approach.
+We first create a \mintinline{python}{Node} class.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        class TrieNode:
+            def __init__(self) -> None:
+                """Initialize the `TrieNode` class."""
+
+                self._children: dict[str, TrieNode] = {}
+                self._isendofword: bool = False
+    \end{minted}
+\end{figure}
+
+We can now design the trie data structure. The initializer will only contain a
+root of the trie.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        class Trie:
+            def __init__(self) -> None:
+                """Initialize the `Trie` class."""
+
+                self._root = TrieNode()
+    \end{minted}
+\end{figure}
+
+Now, the first method to implement is the insertion operation. If we cannot
+insert a word into a trie, we are not going to be able to do much with it. The
+algorithm is very straightforward. One iterates over all characters in the word
+to be inserted and checks if the characters is in the children of the current
+node. If it is, follow the path of that node. If not, create a new node at that
+position and once again, follow that road.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def insert(self, word: str) -> None:
+            """Initialize the `Trie` class."""
+
+            ptr: Node = self._root
+            for char in word:
+                if char not in ptr._children:
+                    ptr._children[char] = TrieNode()
+                ptr = ptr._children[char]
+
+            ptr._isendofword = True
+    \end{minted}
+\end{figure}
+
+One of the primary features of the trie is to be able to search for a word.
+The implementation of this algorithm is shown below.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def search(self, word: str) -> bool:
+            """Check if a trie contains a given word."""
+
+            ptr: Node = self._root
+            for char in word:
+                if char not in ptr._children:
+                    return False
+                ptr = ptr._children[char]
+
+            return ptr._isendofword
+    \end{minted}
+\end{figure}
+
+Similarly, searching a prefix is also very important. It looks almost exactly
+the same as the code for searching a word.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def prefix_search(self, word: str) -> bool:
+            """Check if a trie contains a given prefix."""
+
+            ptr: Node = self._root
+            for char in word:
+                if char not in ptr._children:
+                    return False
+                ptr = ptr._children[char]
+
+            return True
+    \end{minted}
+\end{figure}

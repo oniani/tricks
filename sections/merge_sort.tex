@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Merge Sort
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Merge Sort}
+
+Merge sort is one of the simplest sorting algorithms that scales very well. It
+relies on two operations - \mintinline{python}{merge} and
+\mintinline{python}{sort}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def merge(arr1: list[int], arr2: list[int]) -> list[int]:
+            """Merge two sorted lists."""
+
+            res: list[int] = []
+
+            i: int = 0
+            j: int = 0
+            while i <= len(arr1) - 1 and j <= len(arr2) - 1:
+                if arr1[i] <= arr2[j]:
+                    res.append(arr1[i])
+                    i += 1
+                else:
+                    res.append(arr2[j])
+                    j += 1
+            
+            while i <= len(arr1) - 1:
+                res.append(arr1[i])
+                i += 1
+
+            while j <= len(arr2) - 1:
+                res.append(arr2[j])
+                j += 1
+
+            return res
+    \end{minted}
+\end{figure}
+
+We now need to implement the sort function.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def sort(arr: list[int]) -> list[int]:
+            """Performs a merge sort."""
+
+            if len(nums) <= 1:
+                return nums
+            
+            mid: int = len(arr) // 2
+            left: list[int] = sort(arr[:mid])
+            right: list[int] = sort(arr[mid:])
+
+            return merge(left, right)
+    \end{minted}
+\end{figure}
+

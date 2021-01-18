@@ -1,0 +1,142 @@
+%
+% Author: David Oniani
+%
+%  _____    ___     _  __
+% |_   _| _|_ _|___| |/ /___
+%   | || '__| |/ __| ' // __|
+%   | || |  | | (__| . \\__ \
+%   |_||_| |___\___|_|\_\___/
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Definition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages and Related Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Global, document-wide settings
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% Other essential packages
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{tocloft}
+\usepackage{xcolor}
+
+% Packages for making a fancy-looking cover
+\usepackage{afterpage}
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Remove indentations from paragraphs
+\setlength{\parindent}{0pt}
+
+% PDF information and nice-looking urls
+\hypersetup{%
+    pdfauthor={David Oniani},
+    pdftitle={Tricks},
+    pdfsubject={Algorithms, Data Structures, Tricks},
+    pdfkeywords={Algorithms, Data Structures, Tricks},
+    pdflang={English},
+    colorlinks=true,
+    linkcolor={black!50!blue},
+    citecolor={black!50!blue},
+    urlcolor={black!50!blue}
+}
+
+% Font size for minted
+\setminted{fontsize=\small}
+
+% Colorscheme for minted
+\usemintedstyle{tango}
+
+% Dots for ToC
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Fancy cover
+\newgeometry{left=1in,right=1in,top=1in,bottom=0in}
+
+\DeclareFixedFont{\titlefont}{T1}{ppl}{n}{}{0.8in}
+\DeclareFixedFont{\subtitlefont}{T1}{ppl}{n}{}{0.4in}
+
+\definecolor{color}{HTML}{3c2ac7}
+\pagecolor{color}
+
+\afterpage{\restoregeometry}
+\afterpage{\nopagecolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author(s), Title, and Date
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Author(s)
+% \author{David Oniani\\
+%     \href{mailto:onianidavid@gmail.com}{onianidavid@gmail.com}}
+
+% Title
+% \title{\textbf{Tricks}\\
+%     {\small\textsuperscript{*}Various Algorithmic Tricks for a Great Good!}}
+
+% Date
+% \date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of the Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+% \maketitle
+
+\begin{flushleft}
+    \rule{\paperwidth - 150pt}{1pt}
+    \\
+    \vspace{0.5em}
+    \titlefont tricks
+    \\
+    \vspace{0.25em}
+    \subtitlefont by David Oniani
+    \\
+    \rule{\paperwidth - 150pt}{1pt}
+\end{flushleft}
+\vfill
+\begin{tikzpicture}
+    \centering
+    \node[scope fading=north,inner sep=0pt,outer sep=0pt] {
+        \makebox[\linewidth]{\includegraphics[width=\paperwidth]{cover.jpg}}
+    };
+\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{sections/balanced_parentheses}
+\include{sections/kadanes_algorithm.tex}
+\include{sections/levenshtein_distance}
+\include{sections/merge_sort}
+\include{sections/trie}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The End of the Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Levenshtein Distance - Edit Distance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Levenshtein Distance - Edit Distance}
+
+Given two strings \mintinline{python}{word1} and \mintinline{python}{word2}, we
+need to find the optimal/minimum number of operations required to convert
+\mintinline{python}{word1} to \mintinline{python}{word2}. We are permitted the
+following four operations:
+
+\begin{enumerate}
+    \item Insert a character
+    \item Delete a character
+    \item Replace a character
+    \item Keep a character
+\end{enumerate}
+
+We take the bottom-up dynamic programming approach:
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def levenshtein_distance(word1: str, word2: str) -> int:
+            """Computes the Levenshtein's distance between two words."""
+
+            # Get the lengths
+            m: int = len(word1)
+            n: int = len(word2)
+
+            # Prepopulate the DP matrix
+            dp: list[list[int]] = [
+                [0 for _ in range(n + 1)] for _ in range(m + 1)
+            ]
+
+            # Initialize the DP matrix with base cases
+            for i in range(1, m + 1):
+                dp[i][0] += i
+            for j in range(1, n + 1):
+                dp[0][j] += j
+
+            # Fill the DP Matrix
+            for i in range(1, m + 1):
+                for j in range(1, n + 1):
+                    left: int = dp[i][j - 1]
+                    top: int = dp[i - 1][j]
+                    top_left: int = dp[i - 1][j - 1]
+
+                    # If characters are equal, just copy the diagonal value
+                    if word1[i - 1] == word2[j - 1]:
+                        dp[i][j] = top_left
+                    # Otherwise, take the minimum of three adjacent cells and
+                    # increment the result by one
+                    else:
+                        dp[i][j] = min(left, top, top_left) + 1
+
+            # Return the optimal solution
+            return dp[m][n]
+    \end{minted}
+\end{figure}
