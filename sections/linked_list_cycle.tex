@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Floyd's Cycle Finding Algorithm - Linked List Cycle Detection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Floyd's Cycle Finding Algorithm - Linked List Cycle Detection}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from typing import Union
+
+
+        class Node:
+            def __init__(self, val: int = 0, nxt: Node = Union[None, Node]):
+                self._val = val
+                self._next = nxt
+
+
+        def floyd_cycle(head: Node) -> bool:
+            """An implementation of Floyd's Cycle Finding Algorithm."""
+
+            if not head:
+                return False
+
+            # Initialize slow and fast pointers
+            slow: Node = head
+            fast: Node = head
+            while slow != fast:
+                # No need to check if `fast._next._next`
+                # We check only `fast._next` so that `fast = fast._next._next`
+                # does not result in an error
+                if not fast or not fast._next:
+                    return False
+
+                slow = slow._next
+                fast = fast._next._next
+
+            return True
+    \end{minted}
+\end{figure}

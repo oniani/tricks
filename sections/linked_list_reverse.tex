@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reverse Linked List
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reverse Linked List}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from typing import Union
+
+
+        class Node:
+            def __init__(self, val: int = 0, next: Node = Union[None, Node]):
+                self._val = val
+                self._next = next
+
+
+        def reverse(head: Node) -> bool:
+            """Reverse a linked list."""
+
+            cur: Node = head
+            pre: Node = Union[None, Node]
+            while cur:
+                # Variable `tmp` is needed for moving forward in the loop
+                tmp: Node = cur._next
+
+                # Rearrange pointers
+                cur.next: Union[None, Node] = pre
+                pre = cur
+
+                # Move forward
+                cur = tmp
+
+            return pre
+    \end{minted}
+\end{figure}
