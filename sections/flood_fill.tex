@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Flood Fill - Number of Islands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Flood Fill - Number of Islands}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m \times n)\) where \(m\) is the number of rows
+        and \(n\) is the number of columns.\\
+        Space Complexity:& \(O(m \times n)\) where \(m\) is the number of rows
+        and \(n\) is the number of columns.
+    \end{tabular}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def islands(grid: List[List[str]]) -> int:
+            """Counts the number of islands of 1s.
+
+            NOTE: Uses the fact that lists are mutable (will not work in purely
+                  functional languages such as Haskell)
+            """
+
+            m: int = len(grid)
+            n: int = len(grid[0])
+
+            if m * n == 0:
+                return 0
+
+            islands: int = 0
+            for i in range(m):
+                for j in range(n):
+                    if grid[i][j] == "1":
+                        self.fill(grid, i, j)
+                        islands += 1
+
+            return islands
+
+
+        def flood_fill(grid: list[list[int]], i: int, j: int) -> bool:
+            """Implements the Flood Fill algorithm."""
+
+            # Row index out of bounds
+            if not (0 <= i <= len(grid) - 1):
+                return False
+
+            # Column index out of bounds
+            if not (0 <= j <= len(grid[0]) - 1):
+                return False
+
+            # If the current symbol is not 1, no need to continue
+            if grid[i][j] != "1":
+                return False
+
+            # Mark with a sentinel symbol
+            grid[i][j] = "$"
+
+            # Recurse in four directions
+            flood_fill(grid, i - 1, j)
+            flood_fill(grid, i + 1, j)
+            flood_fill(grid, i, j - 1)
+            flood_fill(grid, i, j + 1)
+    \end{minted}
+\end{figure}
