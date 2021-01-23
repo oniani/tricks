@@ -32,7 +32,7 @@
 
             # Initialize slow and fast pointers
             slow: Node = head
-            fast: Node = head
+            fast: Node = head.next
             while slow != fast:
                 # No need to check if `fast._next._next`
                 # We check only `fast._next` so that `fast = fast._next._next`

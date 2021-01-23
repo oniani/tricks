@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Backtracking - Generate Permutations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Backtracking - Generate Permutations}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m!)\) where \(m\) is the length of the array.\\
+        Space Complexity:& \(O(m!)\) where \(m\) is the length of the array.
+    \end{tabular}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def permute(nums: list[int]) -> list[list[int]]:
+            """Use backtracking to generate all permutations."""
+
+            # Use Python's implicit "booleannes"
+            # `[]` => `False` (generally works for empty sequences)
+            if not nums:
+                return []
+
+            # The array to be filled
+            res: list[list[int]] = []
+
+            # Backtrack and fill the results list
+            # NOTE: lists in Python work like pass-by-reference in C++
+            backtrack(nums, 0, [], res)
+
+            # Return the result
+            return res
+
+
+        def backtrack(
+            nums: list[int], start: int, cur: list[int], res: list[list[int]]
+        ) -> None:
+            """Perform backtracking on the array of numbers."""
+
+            # Base case: we got one full permutation
+            if len(cur) == len(nums):
+                # Need to copy since
+                res.append(cur[:])
+                return
+
+            # Recursive case: generate, recurse, and backtrack
+            for i in range(start, len(nums)):
+                # Append to the current permutation
+                cur.append(nums[i])
+
+                # Place the `i`th element at the start position
+                # NOTE: Needed to include previous elements (before `start`)
+                nums[i], nums[start] = nums[start], nums[i]
+
+                # Recurse
+                backtrack(nums, start + 1, cur, res)
+
+                # Backtrack
+                nums[start], nums[i] = nums[i], nums[start]
+                cur.pop()
+    \end{minted}
+\end{figure}
