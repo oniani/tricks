@@ -34,7 +34,7 @@
                 tmp: Node = cur._next
 
                 # Rearrange pointers
-                cur.next: Union[None, Node] = pre
+                cur._next: Union[None, Node] = pre
                 pre = cur
 
                 # Move forward
