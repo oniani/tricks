@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dynamic Programming - Largest Area Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dynamic Programming - Largest Area Square}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m \times n)\) where \(m\) is the number of rows
+        and \(n\) is the number of columns.\\
+        Space Complexity:& \(O(m \times n)\) where \(m\) is the number of rows
+        and \(n\) is the number of columns.
+    \end{tabular}
+\end{figure}
+
+Given an \(m x n\) binary matrix filled with \(0\)s and \(1\)s, return the area
+of largest square containing only \(1\)s.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+    def largest_area(self, matrix: list[list[int]]) -> int:
+        m: int = len(matrix)
+        n: int = len(matrix[0])
+
+        dp: list[list[int]] = [[0] * n for _ in range(m)]
+
+        res: int = 0
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 1:
+                    dp[i][j] = 1 + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])
+                    res = max(res, dp[i][j])
+
+        return res ** 2
+    \end{minted}
+\end{figure}
