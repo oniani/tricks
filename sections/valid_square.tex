@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Geometry - Valid Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Geometry -- Valid Square}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(1)\)
+        Space Complexity:& \(O(1)\)
+    \end{tabular}
+\end{figure}
+
+Given the coordinates of four points in 2D space \(p_1, p_2, p_3\) and \(p4\),
+check if the given four points can construct a valid square.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def valid_square(p1: list[int], p2: list[int], p3: list[int], p4: list[int]) -> bool:
+            """Checks if the given coordinates can be used for constructing a
+               valid square.
+            """
+
+            # Every point must be different
+            if len(set(map(tuple, [p1, p2, p3, p4]))) != 4:
+                return False
+
+            def distance(p1: list[int], p2: list[int]) -> float:
+                """A helper function to calcuate the Euclidean distance between
+                   two points.
+                """
+                return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+
+            # Store the set of distances
+            distances: set[float] = set()
+
+            # Add all possible connections
+            # NOTE: `distance(p1, p2)` is the same as `distance(p2, p1)`
+            distances.add(distance(p1, p2))
+            distances.add(distance(p1, p3))
+            distances.add(distance(p1, p4))
+            distances.add(distance(p2, p3))
+            distances.add(distance(p2, p4))
+            distances.add(distance(p3, p4))
+
+            # We must have two different lengths: one for the side and the
+            # other for the diagonal
+            return len(distances) == 2
+    \end{minted}
+\end{figure}
