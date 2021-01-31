@@ -18,35 +18,41 @@ check if the given four points can construct a valid square.
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
-        def valid_square(p1: list[int], p2: list[int], p3: list[int], p4: list[int]) -> bool:
-            """Checks if the given coordinates can be used for constructing a
-               valid square.
-            """
+        from collections import Counter
+        from math import sqrt
 
-            # Every point must be different
-            if len(set(map(tuple, [p1, p2, p3, p4]))) != 4:
+
+        # A type to denote a point in two-dimensional space
+        Point = tuple[float, float]
+
+
+        def valid_square(p1: Point, p2: Point, p3: Point, p4: Point) -> bool:
+            """Checks if the given coordinates form a valid square."""
+
+            # All possible edges
+            edges: list[tuple[Point, Point]] = [
+                (p1, p2),
+                (p1, p3),
+                (p1, p4),
+                (p2, p3),
+                (p2, p4),
+                (p3, p4),
+            ]
+
+            def distance(p1: Point, p2: Point) -> float:
+                """Calculate the the Euclidean distance between two points."""
+
+                return sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+
+            # Counts
+            distances: Counter[float] = Counter(
+                map(lambda pair: distance(pair[0], pair[1]), edges)
+            )
+
+            # All edges must be different with only two corresponding values
+            if 0 in distances or set(distances.values()) != {2, 4}:
                 return False
 
-            def distance(p1: list[int], p2: list[int]) -> float:
-                """A helper function to calcuate the Euclidean distance between
-                   two points.
-                """
-                return math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
-
-            # Store the set of distances
-            distances: set[float] = set()
-
-            # Add all possible connections
-            # NOTE: `distance(p1, p2)` is the same as `distance(p2, p1)`
-            distances.add(distance(p1, p2))
-            distances.add(distance(p1, p3))
-            distances.add(distance(p1, p4))
-            distances.add(distance(p2, p3))
-            distances.add(distance(p2, p4))
-            distances.add(distance(p3, p4))
-
-            # We must have two different lengths: one for the side and the
-            # other for the diagonal
-            return len(distances) == 2
+            return True
     \end{minted}
 \end{figure}
