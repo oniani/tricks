@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Draw Circle (Trigonometry)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Draw Circle (Trigonometry)}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the number of iterations.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Given a function that can draw a dot on the screen, write a function that draws
+the circle with the given radius.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        def draw_circle(radius: float, iterations: int) -> None:
+            """Draw a circle with a given radius."""
+
+            for angle in range(iterations):
+                # Degree -> Radian Formula: 180 * degree / pi
+                # But apparently `np.deg2rad` was designed just for this
+                a: float = np.deg2rad(angle)
+                x: float = radius * np.cos(a)
+                y: float = radius * np.sin(a)
+                plt.plot(x, y, marker=".")
+
+            plt.title("Trigonometry-based Circle Drawing Algorithm")
+            plt.show()
+    \end{minted}
+\end{figure}

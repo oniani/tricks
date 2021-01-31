@@ -102,10 +102,10 @@
     \rule{\paperwidth - 150pt}{1pt}
     \\
     \vspace{0.5em}
-    \titlefont Tricks
+    \titlefont{Tricks}
     \\
     \vspace{0.25em}
-    \subtitlefont by David Oniani
+    \subtitlefont{by David Oniani}
     \\
     \rule{\paperwidth - 150pt}{1pt}
 \end{flushright}
@@ -129,19 +129,70 @@
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\include{sections/backtracking}
-\include{sections/balanced_parentheses}
-\include{sections/boyer_moore_voting}
-\include{sections/flood_fill}
-\include{sections/kadanes_algorithm}
-\include{sections/largest_area_square}
-\include{sections/levenshtein_distance}
-\include{sections/linked_list_cycle}
-\include{sections/linked_list_remove_elements}
-\include{sections/linked_list_reverse}
-\include{sections/merge_sort}
-\include{sections/trie}
-\include{sections/valid_square}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Backtracking
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Backtracking}
+
+\include{sections/backtracking/generate_permutations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dynamic Programming
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dynamic Programming}
+
+\include{sections/dynamic_programming/largest_area_square}
+\include{sections/dynamic_programming/levenshtein_distance}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Geometry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Geometry}
+
+\include{sections/geometry/approximate_pi}
+\include{sections/geometry/bresenham}
+\include{sections/geometry/draw_circle}
+\include{sections/geometry/valid_square}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Linked List
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Linked List}
+
+\include{sections/linked_list/floyd}
+\include{sections/linked_list/remove_elements}
+\include{sections/linked_list/reverse}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem Dependent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problem Dependent}
+
+\include{sections/problem_dependent/balanced_parentheses}
+\include{sections/problem_dependent/boyer_moore_voting}
+\include{sections/problem_dependent/flood_fill}
+\include{sections/problem_dependent/kadanes_algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sorting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sorting}
+
+\include{sections/sorting/merge_sort}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Trie}
+
+\include{sections/trie/trie}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The End of the Document
