@@ -47,7 +47,7 @@ check if the given four points can construct a valid square.
 
             # Counts
             distances: Counter[float] = Counter(
-                map(lambda pair: distance(pair[0], pair[1]), edges)
+                map(lambda edge: distance(edge[0], edge[1]), edges)
             )
 
             # All edges must be different with only two corresponding values
