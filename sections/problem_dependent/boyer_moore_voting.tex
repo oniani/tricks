@@ -12,21 +12,23 @@
     \end{tabular}
 \end{figure}
 
+Given an array of integers, find the majority element in the array.
+The majority element is the element that appears more than
+\(floor(\frac{n}{2})\) times. Assume that the majority element exists
+in the array.
+
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
     def majority_element(nums: list[int]) -> int:
-        """Find the majority element in the array (element that occurs more
-           than `m` times where `m` is the length of the array).
-        """
+        """Find the majority element in the array."""
 
         candidate: int = 0
         count: int = 0
         for num in nums:
-            # Candidate gets change iff `count == 0`
+            # Candidate gets changed iff `count == 0`
             candidate = candidate if count else num
-            # Count gets incremented if the candidate and the current number
-            # are the same and decrement otherwise
+            # Increment/decrement based on whether candidate equals current
             count += 1 if candidate == num else -1
 
         return candidate

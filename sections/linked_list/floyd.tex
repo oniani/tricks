@@ -15,28 +15,27 @@
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
-        from typing import Union
+        from typing import Optional
 
 
-        class Node:
-            def __init__(self, val: int = 0, nxt: Node = Union[None, Node]):
+        class ListNode:
+            def __init__(self, val: int = 0, next: Optional[ListNode]):
                 self._val = val
-                self._next = nxt
+                self._next = next
 
 
-        def floyd_cycle(head: Node) -> bool:
+        def floyd_cycle(head: ListNode) -> bool:
             """An implementation of Floyd's Cycle Finding Algorithm."""
 
+            # Make sure that the linked list is not empty
             if not head:
                 return False
 
             # Initialize slow and fast pointers
-            slow: Node = head
-            fast: Node = head.next
+            slow: Optional[ListNode] = head
+            fast: Optional[ListNode] = head.next
             while slow != fast:
-                # No need to check if `fast._next._next`
-                # We check only `fast._next` so that `fast = fast._next._next`
-                # does not result in an error
+                # Check only `fast._next` so that `fast._next._next` exists
                 if not fast or not fast._next:
                     return False
 

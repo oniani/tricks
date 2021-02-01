@@ -15,26 +15,26 @@
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
-        from typing import Union
+        from typing import Optional
 
 
-        class Node:
-            def __init__(self, val: int = 0, next: Node = Union[None, Node]):
+        class ListNode:
+            def __init__(self, val: int = 0, next: Optional[ListNode]):
                 self._val = val
                 self._next = next
 
 
-        def reverse(head: Node) -> bool:
+        def reverse(head: ListNode) -> Optional[ListNode]:
             """Reverse a linked list."""
 
-            cur: Node = head
-            pre: Node = Union[None, Node]
+            cur: Optional[ListNode] = head
+            pre: Optional[ListNode] = None
             while cur:
                 # Variable `tmp` is needed for moving forward in the loop
-                tmp: Node = cur._next
+                tmp: Optional[ListNode] = cur._next
 
                 # Rearrange pointers
-                cur._next: Union[None, Node] = pre
+                cur._next: Optional[ListNode] = pre
                 pre = cur
 
                 # Move forward

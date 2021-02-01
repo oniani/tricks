@@ -18,7 +18,6 @@ the circle with the given radius.
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
-        import numpy as np
         import matplotlib.pyplot as plt
 
 
@@ -34,7 +33,7 @@ the circle with the given radius.
             # Decision parameter
             d: int = 3 - 2 * radius
 
-            # While x coordinate is not less than the x coordinate
+            # While y coordinate is not less than the x coordinate
             while x <= y:
                 plt.scatter(
                     [x, x, -x, -x, y, -y, y, -y],

@@ -21,12 +21,12 @@ the circle with the given radius.
         import numpy as np
         import matplotlib.pyplot as plt
 
-        def draw_circle(radius: float, iterations: int) -> None:
+        def draw_circle(radius: float, step: float) -> None:
             """Draw a circle with a given radius."""
 
-            for angle in range(iterations):
-                # Degree -> Radian Formula: 180 * degree / pi
-                # But apparently `np.deg2rad` was designed just for this
+            angle: float = 0.0
+            while angle <= 360:
+                angle += step
                 a: float = np.deg2rad(angle)
                 x: float = radius * np.cos(a)
                 y: float = radius * np.sin(a)

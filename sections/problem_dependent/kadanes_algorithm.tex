@@ -20,7 +20,7 @@ An implemmentation of the Kadane's algorithm.
         def max_subarray_sum(arr: list[float]) -> float:
             """Return the maximum subarray sum."""
 
-            cur: float = 0
+            cur: float = 0.0
             res: float = float("-inf")
             for num in nums:
                 cur = max(cur + num, num)

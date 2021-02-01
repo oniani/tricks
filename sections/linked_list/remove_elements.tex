@@ -17,16 +17,24 @@ Remove all nodes of the given value from the linked list.
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
-        def remove_elements(head: ListNode, val: int) -> ListNode:
+        from typing import Optional
+
+
+        class ListNode:
+            def __init__(self, val: int = 0, next: Optional[ListNode]):
+                self._val = val
+                self._next = next
+
+
+        def remove_elements(head: ListNode, val: int) -> Optional[ListNode]:
             """Remove elements from the linked list."""
 
-            # We need the dummy node since the first node # can also be equal
-            # to `val`
+            # Dummy node is needed as the first node can also be equal to `val`
             dummy: ListNode = ListNode(0)
             dummy._next: ListNode = head
 
             pre: ListNode = dummy
-            cur: ListNode = head
+            cur: Optional[ListNode] = head
             while cur:
                 # If the given value is encountered, we unlink the element
                 if cur._val == val:
@@ -38,8 +46,7 @@ Remove all nodes of the given value from the linked list.
                 # The current point always moves forward
                 cur = cur._next
 
-            # Return the result
-            # NOTE: We return `dummy._next` as first node is a throwaway node
+            # Return `dummy._next` as first node is a throwaway node
             return dummy._next
     \end{minted}
 \end{figure}
