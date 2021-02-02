@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dutch National Flag Problem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Dutch National Flag Problem}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the length of the array.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Given an array nums with n objects colored red, white, or blue, sort them
+in-place so that objects of the same color are adjacent, with the colors in the
+order red, white, and blue. Integers \(0\), \(1\), and \(2\) are used to
+represent the color red, white, and blue, respectively.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from collections import Counter
+
+
+        def sort_colors(arr: list[int]) -> None:
+            """Sort the list in-place."""
+        
+            # Counts
+            counts: Counter[int] = Counter(arr)
+
+            # Index
+            idx: int = 0
+
+            # Store all the 0s in the beginning 
+            while (counts[0] > 0): 
+                arr[idx] = 0
+                counts[0] -= 1
+                idx += 1
+
+            # Then all the 1s 
+            while (counts[1] > 0): 
+                arr[idx] = 1
+                counts[1] -= 1
+                idx += 1
+
+            # Finally, all the 2s 
+            while (counts[2] > 0): 
+                arr[idx] = 2
+                counts[2] -= 1
+                idx += 1
+    \end{minted}
+\end{figure}
