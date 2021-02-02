@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rotate Array
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Rotate Array}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the length of the array.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Rotate array a given number of times. In other words, every element of the
+array will be shifted to the right the given number of times.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def rotate(arr: list[int], num: int) -> None:
+            """Rotate array `num` times."""
+
+            # Empty sequences evaluate to `False`
+            if not arr:
+                return arr
+
+            # Notice that every `len(A)` operations, there is a cycle
+            num: int = num % len(A)
+
+            # Reverse the entire list
+            rev(arr, 0, len(arr) - 1)
+
+            # Reverse the first `num` numbers
+            rev(arr, 0, num - 1)
+
+            # Reverse the last `len(A) - num` numbers
+            rev(arr, num, len(arr) - 1)
+
+
+        def rev(arr: list[int], i: int, j: int) -> None:
+            """Reverse array from index `i` to index `j` inclusive."""
+
+            while i <= j:
+                arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+                j -= 1
+    \end{minted}
+\end{figure}
