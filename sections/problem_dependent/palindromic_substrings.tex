@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Palindromic Substrings - Expand Around Center
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Palindromic Substrings - Expand Around Center}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m^2)\) where \(m\) is the length of the string.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Count the number of palindromic substrings in this given string.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def palindromic_substrings(string: str) -> int:
+            """Returns the number of palindromic substrings."""
+
+            res: int = 0
+            for idx, _ in enumerate(string):
+                # For odd-length palindromes, with single-character center
+                res += expand(string, idx, idx)
+                # For even-length palindromes, with double-character center
+                res += expand(string, idx, idx + 1)
+
+            return res
+
+        def expand(string: str, i: int, j: int) -> int:
+            """Expands around the center."""
+
+            res: int = 0
+            while i >= 0 and j <= len(string) - 1:
+                if string[i] != string[j]:
+                    break
+
+                res += 1
+
+                i -= 1
+                j += 1
+
+            return res
+    \end{minted}
+\end{figure}
