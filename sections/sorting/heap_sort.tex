@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Heap Sort
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Heap Sort}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m \times \log{m})\) where \(m\) is the length of
+        the array.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Implement the heap sort.
+
+\begin{itemize}
+    \item \mintinline{python}{heapify}: Turns the given list into a heap.
+
+    \item \mintinline{python}{heappop}: Pops and returns the smallest element.
+        The heap remains a heap after this operation and hence, calling
+        \mintinline{python}{heapify} again is not needed.
+
+    \item \mintinline{python}{heappush}: Adds an element to the heap, and
+        re-sorts it afterward so that it remains a heap and calling
+        \mintinline{python}{heapify} again is not needed.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from heapq import heapify, heappop
+
+
+        def heap_sort(arr: list[int]) -> list[int]:
+            """Peforms an in-place heap sort."""
+
+            # Heapify the array so that we can get minimum elements in O(1)
+            heapify(arr)
+
+            # All elements are replaced in-place
+            arr[:] = [heappop(arr) for _ in range(len(arr))]
+    \end{minted}
+\end{figure}
