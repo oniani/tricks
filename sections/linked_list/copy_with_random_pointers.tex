@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copy a Linked List With Random Pointers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Copy a Linked List With Random Pointers}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the number of nodes.\\
+        Space Complexity:& \(O(m)\) where \(m\) is the number of nodes.
+    \end{tabular}
+\end{figure}
+
+Return a deep copy of the linked list with possible random pointers.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from typing import Optional
+
+
+        class ListNode:
+            def __init__(self, val: int = 0, next: Optional[ListNode], random: Optional[ListNode]):
+                self._val: int = val
+                self._next: Optional[ListNode] = next
+                self._random: Optional[ListNode] = random
+
+        def deep_copy(self, head: ListNode) -> ListNode:
+            # If head is empty, return `None`
+            if not head:
+                return None
+
+            # Store random links
+            cache: dict[ListNode, ListNode] = {}
+
+            # Accumulated nodes
+            cur: Node = head
+            while cur:
+                cache[cur] = Node(cur._val)
+                cur = cur._next
+
+            # Add the next and random pointers and build the linked list out of
+            # values of the hashset/dictionary
+            cur: ListNode = head
+            while cur:
+                cache[cur]._next = cache[cur._next] if cur._next else None
+                cache[cur]._random = cache[cur._random] if cur._random else None
+                cur = cur._next
+
+            # Return the head of the deep copy
+            return cache[head]
+    \end{minted}
+\end{figure}
