@@ -34,11 +34,14 @@ Count the number of palindromic substrings in this given string.
 
             res: int = 0
             while i >= 0 and j <= len(string) - 1:
+                # If characters are different, substring is not palindromic
                 if string[i] != string[j]:
                     break
 
+                # Record the substring
                 res += 1
 
+                # Advance the pointers
                 i -= 1
                 j += 1
 

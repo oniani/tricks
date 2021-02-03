@@ -16,6 +16,8 @@ Given an array nums with n objects colored red, white, or blue, sort them
 in-place so that objects of the same color are adjacent, with the colors in the
 order red, white, and blue. Integers \(0\), \(1\), and \(2\) are used to
 represent the color red, white, and blue, respectively.
+\\\\
+The first approach performs two passes, but the space complexity is constant.
 
 \begin{figure}[H]
     \centering
@@ -49,5 +51,35 @@ represent the color red, white, and blue, respectively.
                 arr[idx] = 2
                 counts[2] -= 1
                 idx += 1
+    \end{minted}
+\end{figure}
+
+\clearpage
+
+The second approach is more efficient in terms of runtime complexity as it only
+performs a single pass. The space complexity is still constant.
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def sort_colors(arr: list[int]) -> None:
+            """Sort the list in-place."""
+
+            ptr1: int = 0
+            ptr2: int = len(arr) - 1
+            cur: int = 0
+            while cur <= ptr2:
+                # If `cur` at 0, swap and advance both `cur` and `ptr1`
+                if arr[cur] == 0:
+                    arr[cur], arr[ptr1] = arr[ptr1], arr[cur]
+                    cur += 1
+                    ptr1 += 1
+                # If `cur` at 2, swap and move only `ptr2` as `ptr2` can be 1
+                elif arr[cur] == 2:
+                    arr[cur], arr[ptr2] = arr[ptr2], arr[cur]
+                    ptr2 -= 1
+                # If `cur` at 0, just increment `cur`
+                else:
+                    cur += 1
     \end{minted}
 \end{figure}
