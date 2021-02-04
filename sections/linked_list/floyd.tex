@@ -31,17 +31,26 @@
             if not head:
                 return False
 
+            # Parameter specifying whether there is a cycle
+            cycle: boolean = False
+
             # Initialize slow and fast pointers
             slow: Optional[ListNode] = head
-            fast: Optional[ListNode] = head.next
-            while slow != fast:
-                # Check only `fast._next` so that `fast._next._next` exists
-                if not fast or not fast._next:
-                    return False
+            fast: Optional[ListNode] = head._next
+            while not cycle:
+                # If the fast or its next node does not exist, no cycles
+                if not fast or not fast.next:
+                    break
 
+                # If the slow and fast pointers are the same, we have a cycle
+                if slow == fast:
+                    cycle = True
+                    break
+
+                # Advance both pointers
                 slow = slow._next
                 fast = fast._next._next
 
-            return True
+            return cycle
     \end{minted}
 \end{figure}
