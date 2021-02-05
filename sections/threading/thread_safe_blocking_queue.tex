@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thread-safe Blocking Queue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Thread-safe Blocking Queue}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(1)\) for \mintinline{python}{put},
+        \mintinline{python}{get}, and \mintinline{python}{size}.\\
+        Space Complexity:& \(O(m)\) where \(m\) is the number of items in the
+        queue.
+    \end{tabular}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        from collections import deque
+        from threading import Condition
+
+
+        class ThreadSafeBlockingQueue():
+            """An implementation of the thread-safe blocking queue."""
+
+            def __init__(self, capacity: int) -> None:
+                self._capacity: int = capacity
+                self._q: deque[int] = deque()
+                self._cv: Condition = Condition()
+
+            def put(self, val: int) -> None:
+                """Put a value into the queue."""
+
+                with self._cv:
+                    while len(self._q) == self._capacity:
+                        self._cv.wait()
+
+                    self._q.append(val)
+
+                    # After putting an item, we call `notifyAll` method. Since
+                    # we just added an item to the queue, it is possible that a
+                    # consumer thread is blocked in the `get` method of the
+                    # class, waiting for an item to become available. Hence, we
+                    # send a signal to wake up any waiting threads.
+                    self._cv.notifyAll()
+
+            def get(self) -> int:
+                """Get the value from the queue."""
+
+                with self._cv:
+                    while len(self._q) == 0:
+                        self._cv.wait()
+
+                    val = self._q.popleft()
+
+                    # After consuming an item, `notifyAll` is called since if
+                    # the queue is full, then there might be producer threads
+                    # blocked in the `get()` method
+                    self._cv.notifyAll()
+
+                    return val
+
+            def size(self) -> int:
+                """Return the size of the queue."""
+
+                return len(self._q)
+    \end{minted}
+\end{figure}
