@@ -33,6 +33,7 @@
                 """Put a value into the queue."""
 
                 with self._cv:
+                    # Block
                     while len(self._q) == self._capacity:
                         self._cv.wait()
 
@@ -49,6 +50,7 @@
                 """Get the value from the queue."""
 
                 with self._cv:
+                    # Block
                     while len(self._q) == 0:
                         self._cv.wait()
 
