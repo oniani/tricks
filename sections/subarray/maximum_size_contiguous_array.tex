@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Maximum Size Contiguous Array
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Maximum Size Contiguous Subarray}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the length of the array.\\
+        Space Complexity:& \(O(m)\) where \(m\) is the length of the array.
+    \end{tabular}
+\end{figure}
+
+Given a binary array, find the maximum length of a contiguous subarray with
+equal number of \(0\) and \(1\).
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def max_size_contiguous_subarray(arr: list[int]) -> int:
+            """Find the maximum size contiguous subarray."""
+            
+            cache: dict[int, int] = {0: -1}
+            res: int = 0
+            count: int = 0;
+            for idx, val in enumerate(arr):
+                count += val if val == 1 else -1
+                if count in cache:
+                    res = max(res, idx - cache[count])
+                else:
+                    cache[count] = idx
+
+            return res
+    \end{minted}
+\end{figure}
