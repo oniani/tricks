@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Maximum Size Subarray Sum Equals k
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Maximum Size Subarray Sum Equals k}
+
+\begin{figure}[H]
+    Optimal Solution:\\\\
+    \begin{tabular}{rl}
+        Time Complexity:& \(O(m)\) where \(m\) is the length of the array.\\
+        Space Complexity:& \(O(1)\).
+    \end{tabular}
+\end{figure}
+
+Given an array and a target value \(k\), find the maximum size of a subarray
+that sums to \(k\). If there is not one, return \(0\).
+
+\begin{figure}[H]
+    \centering
+    \begin{minted}{python}
+        def max_size_subarray_sum_k(arr: list[int], k: int) -> int:
+            """Find the maximum size subarray such that its sum equals k."""
+
+            cache = {0: -1}
+            res: int = 0
+            total: int = 0
+            for idx, val in enumerate(arr):
+                total += val
+                res = max(res, idx - cache.get(total - k, idx))
+                cache.setdefault(total, idx)
+
+            return res
+    \end{minted}
+\end{figure}
